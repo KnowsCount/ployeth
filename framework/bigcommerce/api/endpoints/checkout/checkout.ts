@@ -1,34 +1,34 @@
-import type { CheckoutEndpoint } from '.'
+import type { CheckoutEndpoint } from "."
 
 const fullCheckout = true
 
-const checkout: CheckoutEndpoint['handlers']['checkout'] = async ({
-  req,
-  res,
-  config,
+const checkout: CheckoutEndpoint["handlers"]["checkout"] = async ({
+	req,
+	res,
+	config,
 }) => {
-  const { cookies } = req
-  const cartId = cookies[config.cartCookie]
+	const { cookies } = req
+	const cartId = cookies[config.cartCookie]
 
-  if (!cartId) {
-    res.redirect('/cart')
-    return
-  }
+	if (!cartId) {
+		res.redirect("/cart")
+		return
+	}
 
-  const { data } = await config.storeApiFetch(
-    `/v3/carts/${cartId}/redirect_urls`,
-    {
-      method: 'POST',
-    }
-  )
+	const { data } = await config.storeApiFetch(
+		`/v3/carts/${cartId}/redirect_urls`,
+		{
+			method: "POST",
+		}
+	)
 
-  if (fullCheckout) {
-    res.redirect(data.checkout_url)
-    return
-  }
+	if (fullCheckout) {
+		res.redirect(data.checkout_url)
+		return
+	}
 
-  // TODO: make the embedded checkout work too!
-  const html = `
+	// TODO: make the embedded checkout work too!
+	const html = `
        <!DOCTYPE html>
          <html lang="en">
          <head>
@@ -53,10 +53,10 @@ const checkout: CheckoutEndpoint['handlers']['checkout'] = async ({
        </html>
      `
 
-  res.status(200)
-  res.setHeader('Content-Type', 'text/html')
-  res.write(html)
-  res.end()
+	res.status(200)
+	res.setHeader("Content-Type", "text/html")
+	res.write(html)
+	res.end()
 }
 
 export default checkout

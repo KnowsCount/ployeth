@@ -1,10 +1,10 @@
-import { cartFragment } from '../fragments/cart-fragment'
+import { cartFragment } from "../fragments/cart-fragment"
 
 export const getCartQuery = /* GraphQL */ `
-  query activeOrder {
-    activeOrder {
-      ...Cart
-    }
-  }
-  ${cartFragment}
+	query activeOrder {
+		activeOrder {
+			...Cart
+		}
+	}
+	${cartFragment}
 `

@@ -1,1 +1,1 @@
-export * from '@commerce/types/signup'
+export * from "@commerce/types/signup"

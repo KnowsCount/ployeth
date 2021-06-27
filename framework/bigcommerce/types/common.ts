@@ -1,1 +1,1 @@
-export * from '@commerce/types/common'
+export * from "@commerce/types/common"

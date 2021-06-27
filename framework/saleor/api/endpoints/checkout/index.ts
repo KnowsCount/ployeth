@@ -1,18 +1,18 @@
-import { CommerceAPI, GetAPISchema, createEndpoint } from '@commerce/api'
-import checkoutEndpoint from '@commerce/api/endpoints/checkout'
-import { CheckoutSchema } from '@commerce/types/checkout'
+import { CommerceAPI, GetAPISchema, createEndpoint } from "@commerce/api"
+import checkoutEndpoint from "@commerce/api/endpoints/checkout"
+import { CheckoutSchema } from "@commerce/types/checkout"
 
 export type CheckoutAPI = GetAPISchema<CommerceAPI, CheckoutSchema>
 
-export type CheckoutEndpoint = CheckoutAPI['endpoint']
+export type CheckoutEndpoint = CheckoutAPI["endpoint"]
 
-const checkout: CheckoutEndpoint['handlers']['checkout'] = async ({
-  req,
-  res,
-  config,
+const checkout: CheckoutEndpoint["handlers"]["checkout"] = async ({
+	req,
+	res,
+	config,
 }) => {
-  try {
-    const html = `
+	try {
+		const html = `
       <!DOCTYPE html>
         <html lang="en">
         <head>
@@ -34,24 +34,24 @@ const checkout: CheckoutEndpoint['handlers']['checkout'] = async ({
       </html>
     `
 
-    res.status(200)
-    res.setHeader('Content-Type', 'text/html')
-    res.write(html)
-    res.end()
-  } catch (error) {
-    console.error(error)
+		res.status(200)
+		res.setHeader("Content-Type", "text/html")
+		res.write(html)
+		res.end()
+	} catch (error) {
+		console.error(error)
 
-    const message = 'An unexpected error ocurred'
+		const message = "An unexpected error ocurred"
 
-    res.status(500).json({ data: null, errors: [{ message }] })
-  }
+		res.status(500).json({ data: null, errors: [{ message }] })
+	}
 }
 
-export const handlers: CheckoutEndpoint['handlers'] = { checkout }
+export const handlers: CheckoutEndpoint["handlers"] = { checkout }
 
 const checkoutApi = createEndpoint<CheckoutAPI>({
-  handler: checkoutEndpoint,
-  handlers,
+	handler: checkoutEndpoint,
+	handlers,
 })
 
 export default checkoutApi

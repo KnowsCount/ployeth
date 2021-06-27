@@ -1,4 +1,4 @@
-import { RequestInit } from "@vercel/fetch"
+// import RequestInit from "@vercel/fetch"
 import {
 	CommerceAPI,
 	CommerceAPIConfig,
@@ -28,7 +28,7 @@ export interface BigcommerceConfig extends CommerceAPIConfig {
 	// Indicates if the returned metadata with translations should be applied to the
 	// data or returned as it is
 	applyLocale?: boolean
-	storeApiUrl: string
+	storeApiUrl: stringå
 	storeApiToken: string
 	storeApiClientId: string
 	storeChannelId?: string
